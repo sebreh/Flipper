@@ -57,19 +57,19 @@ public class Flipper {
   }
   
   public func flipOn(featureName: String) {
-    if features[featureName] {
+    if let feature = features[featureName] {
       forcedFeatures[featureName] = true
     }
   }
   
   public func flipOff(featureName: String) {
-    if features[featureName] {
+    if let feature = features[featureName] {
       forcedFeatures[featureName] = false
     }
   }
   
   public func resetFeature(featureName: String) {
-    if forcedFeatures[featureName]  {
+    if let feature = forcedFeatures[featureName]  {
       forcedFeatures.removeValueForKey(featureName)
     }
   }

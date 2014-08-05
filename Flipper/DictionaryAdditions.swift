@@ -8,7 +8,7 @@
 
 extension Dictionary {
 
-  func map<T, U>(mapper: (KeyType, ValueType) -> (T, U)) -> Dictionary<T, U> {
+  func map<T, U>(mapper: (Key, Value) -> (T, U)) -> Dictionary<T, U> {
     var dict = Dictionary<T, U>()
     
     for (key, value) in self {
