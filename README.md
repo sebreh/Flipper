@@ -26,3 +26,21 @@ flipper.isEnabled("my_beta_feature", .Release)     // => false
 flipper.isEnabled("my_beta_feature", .Beta)        // => true
 flipper.isEnabled("my_beta_feature", .Development) // => true
 ```
+
+You can force also forcefully enable/disable a feature:
+
+```swift
+flipper.isEnabled("my_beta_feature", .Release) // => false
+
+// Force enable
+flipper.flipOn("my_beta_feature")
+flipper.isEnabled("my_beta_feature", .Release) // => true
+
+// Force disable
+flipper.flipOff("my_beta_feature")
+flipper.isEnabled("my_beta_feature", .Beta)    // => false
+
+// Reset to get back to normal
+flipper.resetFeature("my_beta_feature")
+flipper.isEnabled("my_beta_feature", .Beta)   // => true
+```
