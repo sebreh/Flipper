@@ -31,9 +31,11 @@ public class Flipper {
     }
   }
   
-  class var sharedFlipper : Flipper {
+  public class var sharedFlipper : Flipper {
     return sharedInstance
   }
+  
+  public var currentLevel : Level = .Release
   
   private var features = Dictionary<String, Feature>()
   private var featureLevels = Dictionary<String, Level>()
@@ -90,6 +92,10 @@ public class Flipper {
     }
     
     return false
+  }
+  
+  public func isEnabled(featureName: String) -> Bool {
+    return self.isEnabled(featureName, level: currentLevel)
   }
   
   private func isFeatureEnabled(featureName: String, level: Level) -> Bool? {
