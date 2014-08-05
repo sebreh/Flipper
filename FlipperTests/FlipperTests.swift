@@ -44,4 +44,17 @@ class FlipperTests: XCTestCase {
     XCTAssertFalse(flipper.isEnabled("feature", level: .Beta), "Feature should be enabled for beta")
     XCTAssertTrue(flipper.isEnabled("feature", level: .Development), "Feature should be enabled for development")
   }
+  
+  func testCurrentLevelUsed() {
+    let flipper = Flipper(features: ["feature" : .Beta])
+    flipper.currentLevel = .Release
+    
+    XCTAssertFalse(flipper.isEnabled("feature"), "Feature should not be enabled for release")
+    
+    flipper.currentLevel = .Beta
+    XCTAssertTrue(flipper.isEnabled("feature"), "Feature should be enabled for beta")
+    
+    flipper.currentLevel = .Development
+    XCTAssertTrue(flipper.isEnabled("feature"), "Feature should be enabled for development")
+  }
 }
