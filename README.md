@@ -1,6 +1,6 @@
 # Flipper
 
-Flipper is a very simple Swift library for [feature flipping](http://en.wikipedia.org/wiki/Feature_toggle). Feature flipping is the method of dynamically enabling/disabling pieces of code in your app depending on an availability level. For example, it can be used for enabling beta-only features to beta testers from the same code base as is being shipped to the App Store, without maintaining multiple branches.
+Flipper is a very simple Swift library for [feature flipping](http://en.wikipedia.org/wiki/Feature_toggle). Feature flipping is the method of dynamically enabling/disabling pieces of code in your app depending on an availability level. For example, it can be used for enabling beta-only features for beta testers from the same code base as is being shipped to the App Store. No need to maintain multiple branches. It also allows for other use cases such as remote or partial enabling/disabling of features.
 
 First, you need to configure your flipper with various features and their respective enablement level:
 
