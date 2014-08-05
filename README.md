@@ -44,3 +44,17 @@ flipper.isEnabled("my_beta_feature", .Beta)    // => false
 flipper.resetFeature("my_beta_feature")
 flipper.isEnabled("my_beta_feature", .Beta)   // => true
 ```
+
+If you omit the level from the `isEnabled()` call, the flipper will compare against it's internally configured level as defined by the `currentLevel` property.
+
+```swift
+let flipper = Flipper([ "my_beta_feature": .Beta ])
+
+flipper.currentLevel = .Release
+flipper.isEnabled("my_beta_feature") // => false
+
+flipper.currentLevel = .Beta
+flipper.isEnabled("my_beta_feature") // => true
+```
+
+Finally, for convenience, there is a singleton instance of Flipper available through the read-only `sharedFlipper` class property. This is useful if you only ever want to use a shared instance throughout your app.
