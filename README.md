@@ -4,8 +4,7 @@ Flipper is a very simple Swift library used for [feature flipping](http://en.wik
 
 First, you need to configure your flipper with various features and their respective enablement level:
 
-swift
-```
+```swift
 let flipper = Flipper()
 flipper.addFeature("my_released_feature", .Release)
 flipper.addFeature("my_beta_feature", .Beta)
@@ -22,8 +21,7 @@ let flipper = Flipper([
 
 You can then check if a feature is enabled for a certain level. The key point here is that each level includes features enabled for levels "above". So if a feature is enabled for "Beta", it will also be enabled for "Development", as "Beta" is a *higher* feature level. For example:
 
-swift
-```
+```swift
 flipper.isEnabled("my_beta_feature", .Release)     // => false
 flipper.isEnabled("my_beta_feature", .Beta)        // => true
 flipper.isEnabled("my_beta_feature", .Development) // => true
