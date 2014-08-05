@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Sebastian Rehnby. All rights reserved.
 //
 
+private var sharedInstance = Flipper()
+
 public class Flipper {
   
   public enum Level : UInt {
@@ -27,6 +29,10 @@ public class Flipper {
     func isIncludedForLevel(level: Level) -> Bool {
       return self.toRaw() >= level.toRaw()
     }
+  }
+  
+  class var sharedFlipper : Flipper {
+    return sharedInstance
   }
   
   private var features = Dictionary<String, Feature>()

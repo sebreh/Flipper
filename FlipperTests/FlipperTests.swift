@@ -9,7 +9,13 @@
 import XCTest
 
 class FlipperTests: XCTestCase {
-
+  
+  func testSharedFlipper() {
+    let flipper1 = Flipper.sharedFlipper
+    let flipper2 = Flipper.sharedFlipper
+    XCTAssertTrue(flipper1 === flipper2, "Flippers should be same instance");
+  }
+  
   func testEmptyFlipperShouldNotHaveEnabledFeature() {
     let flipper = Flipper()
     XCTAssertFalse(flipper.isEnabled("feature", level: .Development), "Feature should be disabled")
