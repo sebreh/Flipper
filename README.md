@@ -6,9 +6,9 @@ First, you need to configure your flipper with various features and their respec
 
 ```swift
 let flipper = Flipper()
-flipper.addFeature("my_released_feature", .Release)
-flipper.addFeature("my_beta_feature", .Beta)
-flipper.addFeature("my_developing_feature", .Development)
+flipper.addFeature("my_released_feature", level: .Release)
+flipper.addFeature("my_beta_feature", level: .Beta)
+flipper.addFeature("my_developing_feature", level: .Development)
 
 // or...
 
@@ -22,27 +22,27 @@ let flipper = Flipper([
 You can then check if a feature is enabled for a certain level. The key point here is that each level includes features enabled for levels "above". So if a feature is enabled for "Beta", it will also be enabled for "Development", as "Beta" is a *higher* feature level. For example:
 
 ```swift
-flipper.isEnabled("my_beta_feature", .Release)     // => false
-flipper.isEnabled("my_beta_feature", .Beta)        // => true
-flipper.isEnabled("my_beta_feature", .Development) // => true
+flipper.isEnabled("my_beta_feature", level: .Release)     // => false
+flipper.isEnabled("my_beta_feature", level: .Beta)        // => true
+flipper.isEnabled("my_beta_feature", level: .Development) // => true
 ```
 
 You can force also forcefully enable/disable a feature:
 
 ```swift
-flipper.isEnabled("my_beta_feature", .Release) // => false
+flipper.isEnabled("my_beta_feature", level: .Release) // => false
 
 // Force enable
 flipper.flipOn("my_beta_feature")
-flipper.isEnabled("my_beta_feature", .Release) // => true
+flipper.isEnabled("my_beta_feature", level: .Release) // => true
 
 // Force disable
 flipper.flipOff("my_beta_feature")
-flipper.isEnabled("my_beta_feature", .Beta)    // => false
+flipper.isEnabled("my_beta_feature", level: .Beta)    // => false
 
 // Reset to get back to normal
 flipper.resetFeature("my_beta_feature")
-flipper.isEnabled("my_beta_feature", .Beta)   // => true
+flipper.isEnabled("my_beta_feature", level: .Beta)   // => true
 ```
 
 If you omit the level from the `isEnabled()` call, the flipper will compare against it's internally configured level as defined by the `currentLevel` property.
