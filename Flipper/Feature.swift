@@ -13,6 +13,7 @@ public struct Feature : Equatable, Hashable {
   
   public init(_ name: String) {
     self.name = name
+    self.desc = nil
   }
   
   public init(_ name: String, desc: String) {

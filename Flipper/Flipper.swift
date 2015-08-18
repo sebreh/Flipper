@@ -27,7 +27,7 @@ public class Flipper {
     }
     
     func isIncludedForLevel(level: Level) -> Bool {
-      return self.toRaw() >= level.toRaw()
+      return self.rawValue >= level.rawValue
     }
   }
   

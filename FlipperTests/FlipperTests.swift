@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import UIKit
 
 class FlipperTests: XCTestCase {
   
