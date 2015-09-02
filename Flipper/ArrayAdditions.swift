@@ -8,8 +8,8 @@
 
 extension Array {
   
-  func firstMatching(matcher: T -> Bool) -> T? {
-    var match: T?
+  func firstMatching(matcher: Element -> Bool) -> Element? {
+    var match: Element?
     
     for elem in self {
       if matcher(elem) {
