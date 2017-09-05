@@ -19,43 +19,43 @@ class FlipperTests: XCTestCase {
   
   func testEmptyFlipperShouldNotHaveEnabledFeature() {
     let flipper = Flipper()
-    XCTAssertFalse(flipper.isEnabled("feature", level: .Development), "Feature should be disabled")
+    XCTAssertFalse(flipper.isEnabled("feature", level: .development), "Feature should be disabled")
   }
   
   func testReleaseFeatureShouldBeEnabledForBetaAndDevelopment() {
-    let flipper = Flipper(features: ["feature" : .Release])
+    let flipper = Flipper(features: ["feature" : .release])
     
-    XCTAssertTrue(flipper.isEnabled("feature", level: .Release), "Feature should be enabled for release")
-    XCTAssertTrue(flipper.isEnabled("feature", level: .Beta), "Feature should be enabled for beta")
-    XCTAssertTrue(flipper.isEnabled("feature", level: .Development), "Feature should be enabled for development")
+    XCTAssertTrue(flipper.isEnabled("feature", level: .release), "Feature should be enabled for release")
+    XCTAssertTrue(flipper.isEnabled("feature", level: .beta), "Feature should be enabled for beta")
+    XCTAssertTrue(flipper.isEnabled("feature", level: .development), "Feature should be enabled for development")
   }
   
   func testBetaFeatureShouldBeEnabledForDevelopment() {
-    let flipper = Flipper(features: ["feature" : .Beta])
+    let flipper = Flipper(features: ["feature" : .beta])
     
-    XCTAssertFalse(flipper.isEnabled("feature", level: .Release), "Feature should not be enabled for release")
-    XCTAssertTrue(flipper.isEnabled("feature", level: .Beta), "Feature should be enabled for beta")
-    XCTAssertTrue(flipper.isEnabled("feature", level: .Development), "Feature should be enabled for development")
+    XCTAssertFalse(flipper.isEnabled("feature", level: .release), "Feature should not be enabled for release")
+    XCTAssertTrue(flipper.isEnabled("feature", level: .beta), "Feature should be enabled for beta")
+    XCTAssertTrue(flipper.isEnabled("feature", level: .development), "Feature should be enabled for development")
   }
   
   func testDevelopmentFeatureShouldBeEnabledForDevelopmentOnly() {
-    let flipper = Flipper(features: ["feature" : .Development])
+    let flipper = Flipper(features: ["feature" : .development])
     
-    XCTAssertFalse(flipper.isEnabled("feature", level: .Release), "Feature should not be enabled for release")
-    XCTAssertFalse(flipper.isEnabled("feature", level: .Beta), "Feature should be enabled for beta")
-    XCTAssertTrue(flipper.isEnabled("feature", level: .Development), "Feature should be enabled for development")
+    XCTAssertFalse(flipper.isEnabled("feature", level: .release), "Feature should not be enabled for release")
+    XCTAssertFalse(flipper.isEnabled("feature", level: .beta), "Feature should be enabled for beta")
+    XCTAssertTrue(flipper.isEnabled("feature", level: .development), "Feature should be enabled for development")
   }
   
   func testCurrentLevelUsed() {
-    let flipper = Flipper(features: ["feature" : .Beta])
-    flipper.currentLevel = .Release
+    let flipper = Flipper(features: ["feature" : .beta])
+    flipper.currentLevel = .release
     
     XCTAssertFalse(flipper.isEnabled("feature"), "Feature should not be enabled for release")
     
-    flipper.currentLevel = .Beta
+    flipper.currentLevel = .beta
     XCTAssertTrue(flipper.isEnabled("feature"), "Feature should be enabled for beta")
     
-    flipper.currentLevel = .Development
+    flipper.currentLevel = .development
     XCTAssertTrue(flipper.isEnabled("feature"), "Feature should be enabled for development")
   }
 }

@@ -8,38 +8,38 @@
 
 private var sharedInstance = Flipper()
 
-public class Flipper {
+open class Flipper {
   
   public enum Level : UInt {
-    case Development = 1
-    case Beta
-    case Release
+    case development = 1
+    case beta
+    case release
     
     var description : String {
       switch self {
-        case Development:
+        case .development:
           return "Development"
-        case Beta:
+        case .beta:
           return "Beta"
-        case Release:
+        case .release:
           return "Release"
       }
     }
     
-    func isIncludedForLevel(level: Level) -> Bool {
+    func isIncludedForLevel(_ level: Level) -> Bool {
       return self.rawValue >= level.rawValue
     }
   }
   
-  public class var sharedFlipper : Flipper {
+  open class var sharedFlipper : Flipper {
     return sharedInstance
   }
   
-  public var currentLevel : Level = .Release
+  open var currentLevel : Level = .release
   
-  private var features = Dictionary<String, Feature>()
-  private var featureLevels = Dictionary<String, Level>()
-  private var forcedFeatures = Dictionary<String, Bool>()
+  fileprivate var features = Dictionary<String, Feature>()
+  fileprivate var featureLevels = Dictionary<String, Level>()
+  fileprivate var forcedFeatures = Dictionary<String, Bool>()
   
   public init() {}
   
@@ -55,34 +55,34 @@ public class Flipper {
     }
   }
   
-  public func addFeature(feature: Feature, level: Level) -> Void {
+  open func addFeature(_ feature: Feature, level: Level) -> Void {
     features[feature.name] = feature
     featureLevels[feature.name] = level
   }
   
-  public func addFeature(featureName: String, level: Level) -> Void {
+  open func addFeature(_ featureName: String, level: Level) -> Void {
     addFeature(Feature(featureName), level: level)
   }
   
-  public func flipOn(featureName: String) {
+  open func flipOn(_ featureName: String) {
     if features[featureName] != nil {
       forcedFeatures[featureName] = true
     }
   }
   
-  public func flipOff(featureName: String) {
+  open func flipOff(_ featureName: String) {
     if features[featureName] != nil {
       forcedFeatures[featureName] = false
     }
   }
   
-  public func resetFeature(featureName: String) {
+  open func resetFeature(_ featureName: String) {
     if forcedFeatures[featureName] != nil {
-      forcedFeatures.removeValueForKey(featureName)
+      forcedFeatures.removeValue(forKey: featureName)
     }
   }
   
-  public func isEnabled(featureName: String, level: Level) -> Bool {
+  open func isEnabled(_ featureName: String, level: Level) -> Bool {
     if let forced = forcedFeatures[featureName] {
       return forced
     }
@@ -94,11 +94,11 @@ public class Flipper {
     return false
   }
   
-  public func isEnabled(featureName: String) -> Bool {
+  open func isEnabled(_ featureName: String) -> Bool {
     return self.isEnabled(featureName, level: currentLevel)
   }
   
-  private func isFeatureEnabled(featureName: String, level: Level) -> Bool? {
+  fileprivate func isFeatureEnabled(_ featureName: String, level: Level) -> Bool? {
     if let featureLevel = featureLevels[featureName] {
       return featureLevel.isIncludedForLevel(level)
     }

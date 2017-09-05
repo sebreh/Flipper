@@ -8,7 +8,7 @@
 
 extension Array {
   
-  func firstMatching(matcher: Element -> Bool) -> Element? {
+  func firstMatching(_ matcher: (Element) -> Bool) -> Element? {
     var match: Element?
     
     for elem in self {
